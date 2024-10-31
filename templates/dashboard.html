@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row">
+    <div class="col-md-3">
+        <!-- Sidebar -->
+        <div class="list-group">
+            <a href="{{ url_for('dashboard') }}" class="list-group-item list-group-item-action active">Overview</a>
+            <a href="{{ url_for('submit') }}" class="list-group-item list-group-item-action">Submit Prediction</a>
+            <a href="#" class="list-group-item list-group-item-action">Results</a>
+            <a href="#" class="list-group-item list-group-item-action">Profile Settings</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <!-- Main Content -->
+        <h4>Welcome, {{ current_user.username }}!</h4>
+        <p class="text-muted">Here's an overview of your activity.</p>
+
+        <!-- Submissions Table -->
+        <h5 class="mt-4">Your Submissions</h5>
+        {% if submissions %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date Submitted</th>
+                        <th>Status</th>
+                        <th>View Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submission in submissions %}
+                    <tr>
+                        <td>{{ submission.id }}</td>
+                        <td>{{ submission.submission_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            {% if submission.evaluation_result %}
+                                <span class="badge bg-success">Evaluated</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td><a href="{{ url_for('submission', submission_id=submission.id) }}" class="btn btn-sm btn-primary">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You have no submissions yet. <a href="{{ url_for('submit') }}">Submit your first prediction</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

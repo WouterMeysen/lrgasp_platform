@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Evaluation Results</h2>
+<!-- Placeholder for data visualization -->
+<div class="row">
+    <div class="col-md-12">
+        <h5>Performance Metrics</h5>
+        <canvas id="metricsChart"></canvas>
+    </div>
+</div>
+<!-- Include Chart.js from CDN -->
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Placeholder data for chart
+var ctx = document.getElementById('metricsChart').getContext('2d');
+var metricsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Sensitivity', 'Precision', 'F1 Score'],
+        datasets: [{
+            label: 'Your Submission',
+            data: [0.85, 0.80, 0.82],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+        }, {
+            label: 'Average',
+            data: [0.75, 0.78, 0.76],
+            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}
+

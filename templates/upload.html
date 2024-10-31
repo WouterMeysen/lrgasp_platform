@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Submit a Prediction</h2>
+<form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.data_file.label }} {{ form.data_file() }}<br>
+    {{ form.submit() }}
+</form>
+{% endblock %}

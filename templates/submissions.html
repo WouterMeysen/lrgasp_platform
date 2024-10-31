@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Submit a Prediction</h2>
+<div class="row">
+    <div class="col-md-8">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.data_file.label(class="form-label") }}
+                {{ form.data_file(class="form-control") }}
+                {% for error in form.data_file.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h5>Submission Guidelines</h5>
+        <p>Please ensure your prediction files meet the following criteria:</p>
+        <ul>
+            <li>Accepted formats: TXT, CSV, TSV, GZ</li>
+            <li>Follow the data format specifications.</li>
+            <li>Include necessary metadata.</li>
+        </ul>
+        <a href="#" class="btn btn-link">Download Submission Template</a>
+    </div>
+</div>
+{% endblock %}

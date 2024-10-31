@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">LRGASP Benchmarking Datasets</h2>
+
+    <!-- Introduction -->
+    <p class="lead text-center">Access the datasets used for benchmarking in the LRGASP challenges. These datasets are essential for participants to develop, test, and validate their tools for transcript identification and quantification.</p>
+
+    <!-- Dataset Sections -->
+    <div class="row mt-5">
+        <!-- Challenge 1 Datasets -->
+        <div class="col-md-12">
+            <h3><i class="bi bi-1-circle" style="color: #0d6efd;"></i> Challenge 1: Reconstructing Full-Length Transcripts</h3>
+            <p>Datasets focused on human genome annotations.</p>
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-2 d-flex align-items-center justify-content-center bg-light">
+                        <img src="{{ url_for('static', filename='images/human_icon.png') }}" alt="Human" style="width: 80px;">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">WTC11 Cell Line RNA-Seq Data</h5>
+                            <p class="card-text">A comprehensive set of long-read RNA sequencing data from the WTC11 human cell line.</p>
+                            <a href="#" class="btn btn-sm btn-primary">Download Data</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">View Metadata</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more datasets as needed -->
+        </div>
+
+        <!-- Challenge 2 Datasets -->
+        <div class="col-md-12 mt-5">
+            <h3><i class="bi bi-2-circle" style="color: #0d6efd;"></i> Challenge 2: Quantifying Transcript Abundance</h3>
+            <p>Datasets centered around mouse genome annotations.</p>
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-2 d-flex align-items-center justify-content-center bg-light">
+                        <img src="{{ url_for('static', filename='images/mouse_icon.png') }}" alt="Mouse" style="width: 80px;">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">Mouse ES Cell RNA-Seq Data</h5>
+                            <p class="card-text">Long-read RNA sequencing data from mouse embryonic stem cells for quantification challenges.</p>
+                            <a href="#" class="btn btn-sm btn-primary">Download Data</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">View Metadata</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more datasets as needed -->
+        </div>
+
+        <!-- Challenge 3 Datasets -->
+        <div class="col-md-12 mt-5">
+            <h3><i class="bi bi-3-circle" style="color: #0d6efd;"></i> Challenge 3: De Novo Transcript Reconstruction</h3>
+            <p>Datasets involving genomes lacking high-quality references, such as the manatee.</p>
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-2 d-flex align-items-center justify-content-center bg-light">
+                        <img src="{{ url_for('static', filename='images/manatee_icon.png') }}" alt="Manatee" style="width: 80px;">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">Manatee Leukocyte RNA-Seq Data</h5>
+                            <p class="card-text">Long-read RNA sequencing data from manatee leukocytes for de novo transcriptome assembly.</p>
+                            <a href="#" class="btn btn-sm btn-primary">Download Data</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">View Metadata</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more datasets as needed -->
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="col-md-12 mt-5">
+            <h3><i class="bi bi-box-arrow-down" style="color: #0d6efd;"></i> Additional Resources</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Annotation Files</h5>
+                    <p class="card-text">GENCODE annotations and other reference files for aligning and interpreting the datasets.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Download Annotations</a>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Sample Metadata</h5>
+                    <p class="card-text">Detailed metadata for all samples, including library preparation methods and sequencing platforms.</p>
+                    <a href="#" class="btn btn-sm btn-primary">Download Metadata</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
