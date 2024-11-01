@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge 3</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='challenge_3.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Challenge 3</h1>
+  </header>
+  <main>
+
+    <!-- Form to upload file and run the script -->
+    <div class="script-runner">
+      <form action="{{ url_for('run_script') }}" method="POST" enctype="multipart/form-data">
+        <div class="dropdown-container">
+          <label for="organism-dropdown">Organism: </label>
+          <select id="organism-dropdown" class="dropdown" name="organism" required>
+            <option value="" disabled selected>Choose organism...</option>
+            <option value="mouse">Mouse</option>
+            <option value="manatee">Manatee</option>
+          </select>
+        </div>
+
+        <div class="upload-row">
+          <span class="file-label">Transcriptome File:</span>
+          <div id="file-name-display">No file chosen</div>
+          <label for="file-upload" class="custom-file-upload">Choose File</label>
+          <input type="file" id="file-upload" name="file" onchange="displayFileName()" hidden required>
+          <button type="submit">Run Script</button>
+        </div>
+
+        <!-- Checkbox for skipORF -->
+        <div class="checkbox-row">
+          <input type="checkbox" id="skipORF" name="skipORF">
+          <label for="skipORF">skipORF</label>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const dropdown = document.getElementById('organism-dropdown');
+
+    // Change color to black only when an organism is selected
+    dropdown.addEventListener('change', function() {
+      dropdown.style.color = 'black';
+    });
+
+    // Display the selected file name
+    function displayFileName() {
+      const fileInput = document.getElementById('file-upload');
+      const fileNameDisplay = document.getElementById('file-name-display');
+      fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "No file chosen";
+    }
+  </script>
+</body>
+</html>
