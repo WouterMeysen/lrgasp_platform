@@ -1,0 +1,120 @@
+/* Body styling */
+body {
+  background-image: url("backgrounds/challenges_background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.5); /* Optional semi-transparent background for better contrast */
+}
+
+header h1 {
+  font-size: 128px;
+  color: white;
+  margin: 0;
+}
+
+/* Dropdown container styling */
+.dropdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 300px;
+  margin-right: 800px;
+}
+
+/* Label styling */
+.dropdown-container label {
+  font-size: 20px;
+  color: white;
+}
+
+/* Dropdown styling */
+.dropdown {
+  font-size: 16px;
+  padding: 5px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #989898; /* Initial red color for the placeholder */
+  margin-left: 20px;
+}
+
+/* Script runner container styling */
+.script-runner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* File label styling */
+.file-label {
+  font-size: 20px;
+  color: white;
+  margin-right: 5px; /* Adjust spacing as needed */
+}
+
+/* New row for file upload elements */
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+  transform: translate(600px, -30px);
+}
+
+/* Label that acts as the file upload button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #fff7e9;
+  color: #353535;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* File name display styling */
+#file-name-display {
+  font-size: 16px;
+  padding: 5px;
+  background-color: white; /* White background for file name */
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+/* Run script button styling */
+.script-runner button {
+  padding: 5px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 50px;
+  width: 100px;
+}
+
+.script-runner button:hover {
+  background-color: #45a049;
+}
+
+.checkbox-row {
+  color: white;
+  transform: translate(900px);
+}
