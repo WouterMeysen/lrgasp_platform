@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flask App Tool</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Flask App Tool Name</h1>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <a href="{{ url_for('challenge1') }}">Challenge 1</a>
+    <a href="{{ url_for('challenge2') }}">Challenge 2</a>
+    <a href="{{ url_for('challenge3') }}">Challenge 3</a>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="content">
+    <p>Welcome to the main content area of the Flask App Tool.</p>
+  </main>
+</body>
+</html>
