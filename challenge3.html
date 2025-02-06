@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 3</title>
+    <style>
+        /* General Reset and Body */
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  width: 150%;
+  background: #126bf2;
+  transform: translate(-335px, -24px);
+  font-size: 128px;
+  color: white;
+}
+header h2, header h3 {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+}
+header h2 {
+  transform: translate(-100px, -10px);
+    color: #126bf2;
+    font-size: 32px;
+    position: absolute;
+}
+header h3 {
+  transform: translate(650px,-50px);
+    color: #126bf2;
+    font-size: 36px;
+    position: absolute;
+}
+
+/* Lines */
+.vertical-line, .horizontal-line {
+  position: absolute;
+  background-color: black;
+}
+.vertical-line {
+  width: 2px;
+  height: 80%;
+  transform: translate(250px, 63px);
+    position: absolute;
+}
+.horizontal-line {
+  height: 2px;
+  width: 200%;
+  transform: translate(-400px, 196px);
+    position: absolute;
+}
+
+.box-dataset1{
+    width: 1100px;
+    height: 275px;
+    border: 2px dashed black;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(300px, 310px);
+}
+
+.box-dataset2 {
+  width: 1100px;
+  height: 205px;
+  border: 2px dashed black; /* Make it obviously visible. */
+  pointer-events: none;
+  position: absolute;
+  transform: translate(52px, 135px);
+}
+
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+/* Dropdown & Text Inputs */
+.dropdown, .text-input {
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+.dropdown {
+  padding: 5px;
+  width: 175px;
+  color: black;
+}
+.dropdown::placeholder, .text-input::placeholder {
+  color: black;
+  opacity: 1;
+}
+.text-input {
+  padding: 4px;
+  color: black;
+}
+
+/* Container Labels */
+.dropdown-container label {
+  font-size: 18px;
+  color: black;
+  transform: translate(0, 3px);
+}
+
+/* Specific Container Positioning */
+.organism-dropdown-container {
+  transform: translate(155px, 50px);
+  width: 800px;
+}
+.tool-name-container {
+  transform: translate(600px, 19px);
+}
+.platform-dropdown-container {
+  transform: translate(617px, 36px);
+}
+
+#platform-dropdown{
+    width: 164px;
+}
+
+.library-dropdown-container {
+  transform: translate(532px, 50px);
+}
+#library-dropdown{
+    width: 164px;
+}
+
+.data-category-container {
+  transform: translate(570px, 65px);
+}
+
+#data-category-dropdown{
+    width: 164px;
+}
+
+/* Script Runner */
+.script-runner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* File Upload Row */
+.upload-row, .annotation-container {
+  position: absolute;
+}
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translate(80px, -60px);
+
+}
+
+.upload-row-annotation{
+    position: absolute;
+    border: red 1px solid;
+}
+
+.upload-row-reference{
+    position: absolute;
+}
+
+.upload-row-coverage{
+    position: absolute;
+}
+
+.file-label {
+  font-size: 18px;
+  color: #000;
+}
+.custom-file-upload-transcriptome {
+  display: inline-block;
+  padding: 3px;
+  font-size: 16px;
+  background-color: #fff7e9;
+  border: 1px solid black;
+  color: #353535;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.custom-file-upload-annotation {
+  padding: 3px;
+  font-size: 16px;
+  background-color: #fff7e9;
+  border: 1px solid black;
+  color: #353535;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transform: translate(53px,0);
+}
+
+.custom-file-upload-reference{
+    padding: 3px;
+  font-size: 16px;
+  background-color: #fff7e9;
+  border: 1px solid black;
+  color: #353535;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transform: translate(-720px,-1px);
+  height: 32px;
+position: absolute;
+    width: 100px;
+}
+
+.custom-file-upload-coverage{
+    padding: 3px;
+  font-size: 16px;
+  background-color: #fff7e9;
+  border: 1px solid black;
+  color: #353535;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transform: translate(-720px,1px);
+  height: 31px;
+  width: 145px;
+  position: absolute;
+}
+
+#file-name-display{
+font-size: 14px;
+  padding: 4px;
+  background-color: white;
+  color: #6c6c6c;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 175px;
+  height: 32px; /* Let height size automatically */
+  text-align: left;
+}
+
+#annotation-file-name-display{
+  font-size: 14px;
+  padding: 4px;
+  background-color: white;
+  color: #6c6c6c;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 26px; /* Let height size automatically */
+  text-align: left;
+    transform: translate(-969px, 1px);
+    position: absolute;
+    width: 125px;
+}
+
+#reference-file-name-display{
+    font-size: 14px;
+  padding: 4px;
+  background-color: white;
+  color: #6c6c6c;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 26px; /* Let height size automatically */
+  text-align: left;
+    transform: translate(-904px, 3px);
+    position: absolute;
+    width: 125px;
+}
+
+#coverage-directory-name-display{
+    font-size: 14px;
+  padding: 4px;
+  background-color: white;
+  color: #6c6c6c;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 26px; /* Let height size automatically */
+  text-align: left;
+    transform: translate(-904px, 3px);
+    position: absolute;
+    width: 158px;
+}
+
+#annotation-file-name-display-choose-file{
+    transform: translate(-790px, -2px);
+    position: absolute;
+    width: 100px;
+}
+
+#add-dataset-button {
+  transform: translate(-25px, -175px);
+}
+
+/* Add Dataset */
+.add-dataset-container {
+  display: flex;
+  justify-content: center;
+  transform: translate(800px, 270px);
+  position: absolute;
+}
+
+.add-dataset {
+  background-color: black;
+  color: whitesmoke;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  height: 30px;
+}
+.add-dataset:hover {
+  background-color: #4c4c4c;
+}
+
+#remove-dataset-button{
+   background-color: whitesmoke;
+   color: black;
+   border: 1px black solid;
+   font-size: 14px;
+   border-radius: 5px;
+   cursor: pointer;
+   transform: translate(50px,-195px);
+    width: 150px;
+    height: 30px;
+}
+
+#remove-dataset-button:hover{
+    background-color: #d3d3d3;
+}
+
+/* Run Script Button */
+.script-runner button {
+  padding: 5px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  border: 1px solid black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  transform: translate(650px, 210px);
+}
+
+/* Overlay and Progress */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#progress-container {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 750px;
+}
+#progress-bar-container {
+  width: 80%;
+  background-color: #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#progress-bar {
+  width: 0;
+  height: 20px;
+  background: #4CAF50;
+}
+
+/* Annotation Container */
+.annotation-container {
+  transform: translate(115px, -12px);
+    position: absolute;
+}
+
+#annotation-upload-row{
+    transform: translate(1215px, -12px);
+    position: absolute;
+}
+
+/* Custom Input Boxes */
+#organism-custom-input,
+.custom-platform-box,
+.custom-lib_prep-box {
+  display: none;
+  font-size: 14px;
+  padding: 5px;
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid white;
+  color: black;
+  height: 26px;
+  position: absolute;
+    transform: translate(-173px,3px);
+}
+
+#organism-custom-input:focus{
+    outline: none;
+}
+.custom-platform-box {
+  transform: translate(-160px, 3px);
+    border-color: white;
+    width: 125px;
+    height: 26px;
+}
+
+.custom-platform-box:focus{
+    outline: 0;
+}
+
+.custom-lib_prep-box {
+  transform: translate(-160px, 3px);
+    border-color: white;
+    width: 125px;
+    height: 26px;
+}
+
+.custom-lib_prep-box:focus {
+      outline: 0; /* Red outline */
+    }
+
+/* Reference Container */
+.reference-container {
+  transform: translate(121px, 34px);
+  width: 400px;
+
+}
+#reference-upload-row {
+  transform: translate(1150px, 2px);
+  display: none;
+  width: 225px;
+}
+
+/* Coverage Container */
+.coverage-container {
+  transform: translate(79px, 50px);
+  width: 600px;
+}
+#coverage-upload-row {
+  transform: translate(1150px, 18px);
+  display: none;
+  width: 400px;
+}
+
+/* ############### FOR SECOND DATASET ################# */
+        .platform-row {
+  transform: translate(600px, 150px);
+  position: absolute;
+}
+
+.platform-dropdown-2 {
+  font-size: 14px;
+  padding: 5px;
+  width: 164px;
+  border-radius: 5px;
+  border: 1px solid black;
+  transform: translate(5px, -5px);
+  position: absolute;
+}
+
+.platform-custom-input-2 {
+  display: none;
+  font-size: 14px;
+  padding: 5px;
+  width: 145px;
+  border-radius: 5px;
+  border: 0 solid white;
+  color: black;
+  position: absolute;
+  height: 24px;
+  transform: translate(987px, 98px);
+}
+
+.platform-custom-input-2:focus{
+    outline: none;
+}
+
+        .library-row-2{
+            transform:translate(523px,190px);
+            position: absolute;
+        }
+
+        #library-dropdown-2{
+            font-size: 14px;
+            padding: 5px;
+            width: 164px;
+            border-radius: 5px;
+            border: 1px solid black;
+            transform: translate(5px,0);
+        }
+
+        #library-custom-input-2{
+            display: none;
+            font-size:14px;
+            padding:5px;
+            width:140px;
+            color:black;
+            border: 0 white solid;
+            position: absolute;
+            height: 24px;
+            transform: translate(987px, 144px);
+        }
+
+        #library-custom-input-2:focus{
+            outline: none;
+        }
+
+        .data-category-row{
+            transform: translate(556px, 235px);
+            position: absolute;
+        }
+
+        #data-category-dropdown-2{
+            font-size: 14px;
+            padding: 5px;
+            width: 164px;
+            border-radius: 5px;
+            border: 1px solid black;
+            transform: translate(5px,0);
+        }
+
+
+        .upload-row-2{
+            transform: translate(59px,148px);
+            position: absolute;
+            display: flex;
+        }
+
+        #file-name-display-2{
+            font-size: 14px;
+            padding: 5px;
+            background-color: white;
+            color: #6c6c6c;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 175px;
+            position: absolute;
+            transform: translate(175px,-3px);
+            height: 31px;
+        }
+
+        .custom-file-upload-transcriptome-2{
+            display: inline-block;
+            padding: 3px;
+            font-size: 14px;
+            background-color: #fff7e9;
+            border: 1px solid black;
+            color: #353535;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            transform: translate(355px,-3px);
+            height: 31px;
+            width: 100px;
+        }
+
+        .annotation-container-2{
+            position: absolute;
+            transform: translate(89px, 190px);
+        }
+
+        #annotation-dropdown-2{
+            font-size: 14px;
+            padding: 5px;
+            width: 175px;
+            border: 1px solid black;
+            border-radius: 5px;
+            position: absolute;
+            transform: translate(5px,0);
+        }
+
+        #annotation-upload-row-2{
+            display: none;
+        }
+
+        #annotation-file-name-display-2{
+            font-size: 14px;
+            padding: 5px;
+            background-color: white;
+            color: #6c6c6c;
+            border: 1px solid white;
+            border-radius: 5px;
+            width: 150px;
+            height: 24px;
+            position: absolute;
+            transform: translate(158px, 214px);
+        }
+
+        #annotation-file-name-display-2:focus{
+            outline: none;
+        }
+
+        .custom-file-upload-annotation-2{
+display: inline-block;
+            padding: 3px;
+            font-size: 14px;
+            background-color: #fff7e9;
+            border: 1px solid black;
+            color: #353535;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            transform: translate(334px,215px);
+            height: 31px;
+            width: 100px;
+        }
+
+        .reference-container-2{
+            position: absolute;
+            transform: translate(95px, 235px);
+            width: 400px;
+        }
+
+       #reference-dropdown-2{
+            font-size: 14px;
+           padding: 5px;
+           width: 175px;
+           border: 1px solid black;
+           border-radius: 5px;
+           position: absolute;
+           transform: translate(5px,0);
+        }
+
+       #reference-upload-row-2{
+            display: none;
+        }
+
+        #reference-file-name-display-2{
+           font-size: 14px;
+            padding: 5px;
+            background-color: white;
+            color: #6c6c6c;
+            border: 1px solid white;
+            border-radius: 5px;
+            width: 150px;
+            height: 24px;
+            position: absolute;
+            transform: translate(158px, 260px);
+        }
+
+        .custom-file-upload-2{
+            display: inline-block;
+            padding: 3px;
+            font-size: 14px;
+            background-color: #fff7e9;
+            border: 1px solid black;
+            color: #353535;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            transform: translate(334px,260px);
+            height: 31px;
+            width: 100px;
+        }
+
+        .coverage-container-2{
+            position: absolute;
+            transform: translate(55px, 280px);
+        }
+
+        #coverage-dropdown-2{
+            font-size: 14px;
+            padding: 5px;
+            width: 175px;
+            border: 1px solid black;
+            border-radius: 5px;
+            transform: translate(5px, 0);
+            height: 31px;
+        }
+
+        #coverage-upload-row-2{
+            display: none;
+        }
+
+        #coverage-directory-name-display-2{
+            font-size: 13px;
+            padding: 5px;
+            background-color: white;
+            color: #6c6c6c;
+            border: 0 solid white;
+            border-radius: 5px;
+            width: 150px;
+            position: absolute;
+            transform: translate(160px, 305px);
+            height: 24px;
+        }
+
+        .custom-file-upload-coverage-2{
+            display: inline-block;
+            padding: 3px;
+            font-size: 14px;
+            background-color: #fff7e9;
+            border: 1px solid black;
+            color: #353535;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            transform: translate(334px,305px);
+            height: 31px;
+            width: 125px;
+        }
+
+        /* Custom file upload button */
+.custom-file-upload {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+/* Style for file name display */
+.file-name {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #6c6c6c;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.sirvs-checkboxes{
+    position: absolute;
+    transform: translate(910px,-175px);
+}
+
+
+
+/* Toggle Switch Styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 25px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(25px);
+}
+
+.comparison {
+  transform: translate(-450px, 150px);
+  display: none; /* Hidden by default */
+    position: absolute;
+}
+
+#comparison-dropdown {
+  font-size: 16px;
+  padding: 5px;
+  background-color: white;
+  color: #6c6c6c;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 250px;
+  height: auto; /* Adjust height for multiple selections */
+  text-align: left;
+}
+
+/* Style for the Choices.js dropdown */
+.choices {
+  width: 250px;
+    transform: translate(100px,-35px);
+}
+
+.choices__list--dropdown {
+  max-height: 200px; /* Add scrolling if there are many options */
+  overflow-y: auto;
+}
+
+.remove-btn {
+    font-size: 16px;  /* Change this value */
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+
+}
+
+/* Change background color of selected chips */
+.choices__list--multiple .choices__item {
+    background-color: #007bff !important; /* Replace with your desired color */
+    color: white !important; /* Change text color for contrast */
+    border-radius: 10px; /* Optional: Make it rounded */
+    padding: 5px 10px; /* Optional: Adjust padding */
+    border-color: deeppink;
+}
+
+/* If you want a hover effect */
+.choices__list--multiple .choices__item:hover {
+    background-color: #006bdd !important; /* Slightly darker shade */
+}
+
+.sirv-checkbox-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+#sirv-file-container{
+    transform: translate(125px,25px);
+    position: absolute;
+}
+
+.custom-file-upload_sirv{
+    display: inline-block;
+            padding: 3px;
+            font-size: 12px;
+            background-color: #007bff;
+            border: 1px solid black;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            height: 31px;
+            width: 100px;
+    line-height: 25px;
+}
+
+#sirv-file-name{
+    transform: translate(-125px, -5px);
+    position: absolute;
+    height: 32px;
+    width: 120px;
+}
+
+.ercc-checkbox-container {
+    transform: translate(0, 65px);
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.custom-file-upload_ercc{
+    display: inline-block;
+            padding: 3px;
+            font-size: 12px;
+            background-color: #007bff;
+            border: 1px solid black;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            height: 31px;
+            width: 100px;
+    line-height: 25px;
+    transform: translate(125px, 90px);
+}
+
+#ercc-file-name{
+    transform: translate(0, 85px);
+    position: absolute;
+    height: 32px;
+    width: 120px;
+}
+
+.sequin-checkbox-container {
+    transform: translate(0, 130px);
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.custom-file-upload_sequin{
+    display: inline-block;
+            padding: 3px;
+            font-size: 12px;
+            background-color: #007bff;
+            border: 1px solid black;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            height: 31px;
+            width: 100px;
+    line-height: 25px;
+    transform: translate(125px, 155px);
+}
+
+#sequin-file-name{
+    transform: translate(0, 150px);
+    position: absolute;
+    height: 32px;
+    width: 120px;
+}
+
+#terminal-log-container{
+     width:80%;
+    height:200px;
+    background-color:black;
+    color: limegreen;
+    border: black 1px solid;
+    overflow-y:scroll;
+    margin:20px auto;
+    padding:10px;
+    border-radius: 15px;
+    text-align: left;
+}
+
+
+
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+{% extends "base.html" %}
+{% block content %}
+<div class="vertical-line"></div>
+<div class="horizontal-line"></div>
+<div class="box-dataset1"></div>
+
+<header>
+  <h1>Challenge 3</h1>
+    <h2 style="text-align: center; transform: translate(-175px,0); font-size: 24px;">Is your data derived from <br> a LRGASP dataset?</h2>
+    <div style="transform: translate(-75px, 100px);">
+        <label class="toggle-switch">
+        <input type="checkbox" id="toggleSwitchLRGASP">
+        <span class="slider"></span>
+    </label>
+    </div>
+    <h2 style="text-align: center; transform: translate(-225px,200px); font-size: 24px;">Do you want to compare your results <br> with LRGASP results?</h2>
+    <div style="transform: translate(-75px, 300px);">
+        <!-- Toggle Switch -->
+    <label class="toggle-switch">
+        <input type="checkbox" id="toggleSwitchComparison">
+        <span class="slider"></span>
+    </label>
+    </div>
+    <h3> Run SQANTI3 On Your Data</h3>
+</header>
+
+<main class="main-container">
+  <!-- Form to upload file and run the script -->
+  <div class="script-runner">
+        <form id="script-form" action="{{ url_for('run_script') }}" method="POST" enctype="multipart/form-data">
+
+      <!-- Organism Dropdown -->
+      <div class="dropdown-container organism-dropdown-container">
+        <label for="organism-dropdown">Organism: </label>
+        <select id="organism-dropdown" class="dropdown" name="organism" required>
+          <option value="" disabled selected>Choose organism...</option>
+          <option value="mouse">Mouse</option>
+          <option value="manatee">Manatee</option>
+          <option value="custom">Custom</option>
+        </select>
+        <!-- Hidden text input for custom organism -->
+        <input type="text" id="organism-custom-input" name="organism_custom" placeholder="Please type...">
+      </div>
+
+        <!-- Tool Name Input Box -->
+      <div class="dropdown-container tool-name-container">
+        <label for="tool-input">Tool Name: </label>
+        <input type="text" id="tool-input" class="text-input" name="tool" placeholder=" your_tool">
+      </div>
+
+      <!-- Platform Dropdown -->
+<div class="dropdown-container platform-dropdown-container">
+    <label for="platform-dropdown">Platform: </label>
+    <select id="platform-dropdown" class="dropdown" name="platform" required>
+        <option value="PacBio" selected>PacBio</option>
+        <option value="ONT">Oxford Nanopore Technologies</option>
+        <option value="custom">Custom</option>
+    </select>
+    <!-- Hidden text input for custom platform -->
+    <input class="custom-platform-box" type="text" id="platform-custom-input" name="platform_custom" placeholder="Enter Platform..." style="display: none;">
+</div>
+
+<!-- Library Preparation Dropdown -->
+<div class="dropdown-container library-dropdown-container">
+    <label for="library-dropdown">Library Preparation: </label>
+    <select id="library-dropdown" class="dropdown" name="library_preparation" required>
+        <option value="cDNA" selected>cDNA</option>
+        <option value="directRNA">directRNA</option>
+        <option value="R2C2">R2C2</option>
+        <option value="CapTrap">CapTrap</option>
+        <option value="custom">Custom</option>
+    </select>
+    <!-- Hidden text input for custom library preparation -->
+    <input class="custom-lib_prep-box" type="text" id="library-custom-input" name="library_custom" placeholder="Please type..." style="display: none;">
+</div>
+
+      <!-- Data Category Dropdown -->
+      <div class="dropdown-container data-category-container">
+        <label for="data-category-dropdown">Data Category: </label>
+        <select id="data-category-dropdown" class="dropdown" name="data_category" required>
+          <option value="NA" selected>NA</option>
+          <option value="LS">LS</option>
+          <option value="SO">SO</option>
+          <option value="LO">LO</option>
+        </select>
+      </div>
+
+      <!-- Transcriptome File -->
+      <div class="upload-row">
+        <span class="file-label">Transcriptome File:</span>
+        <div id="file-name-display">&nbsp;No file chosen...</div>
+        <label for="file-upload" class="custom-file-upload-transcriptome">Choose File </label>
+        <input type="file" id="file-upload" name="file" onchange="displayFileName()" hidden required>
+        <button type="button" onclick="start_progress(event)">Run Script</button>
+      </div>
+
+      <!-- Annotation File -->
+<div class="dropdown-container annotation-container">
+  <label for="annotation-dropdown">Annotation File: </label>
+  <select id="annotation-dropdown" class="dropdown" name="annotation" onchange="toggleAnnotationInput()">
+    <option value="default">LRGASP Data</option>
+    <option value="custom">Custom</option>
+    <option value="NA" selected>None</option>
+  </select>
+</div>
+
+<!-- Annotation File Upload Row -->
+<div class="upload-row-annotation" id="annotation-upload-row" style="display: none;">
+  <div id="annotation-file-name-display" class="click-through">&nbsp;No file chosen...</div>
+  <label for="annotation-upload" class="custom-file-upload-annotation" id="annotation-file-name-display-choose-file">Choose File</label>
+  <input type="file" id="annotation-upload" name="annotation_file" onchange="displayAnnotationFileName()" hidden>
+</div>
+
+<!-- Reference File -->
+      <div class="dropdown-container reference-container">
+        <label for="reference-dropdown">Reference File: </label>
+        <select id="reference-dropdown" class="dropdown" name="reference" onchange="toggleReferenceInput()">
+          <option value="default" selected>LRGASP Data</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <!-- Reference File Upload Row -->
+      <div class="upload-row-reference" id="reference-upload-row">
+        <div id="reference-file-name-display">&nbsp;No file chosen...</div>
+        <label for="reference-upload" class="custom-file-upload-reference">Choose File</label>
+        <input type="file" id="reference-upload" name="reference_file" onchange="displayReferenceFileName()" hidden>
+      </div>
+
+            <!-- Coverage Directory -->
+<div class="dropdown-container coverage-container">
+    <label for="coverage-dropdown">Coverage Directory: </label>
+    <select id="coverage-dropdown" class="dropdown" name="coverage_directory" onchange="toggleCoverageInput()">
+        <option value="none">None</option>
+        <option value="default" selected>LRGASP Data</option>
+        <option value="custom">Custom</option>
+    </select>
+</div>
+
+<!-- Coverage Directory Upload Row -->
+<div class="upload-row-coverage" id="coverage-upload-row" style="display: none;">
+    <div id="coverage-directory-name-display">&nbsp;No directory chosen...</div>
+    <label for="coverage-upload" class="custom-file-upload-coverage">Choose Directory</label>
+    <input type="file" id="coverage-upload" name="coverage_directory[]" webkitdirectory multiple onchange="displayCoverageDirectoryName()" hidden>
+</div>
+
+            <div class="comparison">
+                <label>Comparison</label>
+                <select id="comparison-dropdown" name="comparison-dropdown" multiple>
+                    <option name="comparison_option_bambu" value="Bambu"> Bambu</option>
+                    <option name="comparison_option_RNA_Bloom" value="RNA_Bloom"> RNA Bloom</option>
+                    <option name="comparison_option_rnaSPAdes" value="rnaSPAdes"> rnaSPAdes</option>
+                    <option name="comparison_option_StringTie2_IsoQuant" value="StringTie2_IsoQuant"> StringTie2 IsoQuant</option>
+                </select>
+            </div>
+
+<div class="sirvs-checkboxes">
+  <label>Select the SIRV types present:</label>
+  <div>
+    <!-- SIRV -->
+      <div class="sirv-checkbox-container">
+        <label>
+            <input type="checkbox" id="sirv-checkbox" value="SIRV" onclick="toggleFileInput('sirv')"> SIRV
+        </label>
+    </div>
+
+    <div id="sirv-file-container" style="display: none;">
+      <label for="sirv-file-upload" class="custom-file-upload_sirv">Choose SIRV</label>
+      <input type="file" id="sirv-file-upload" name="sirv_file" onchange="displayFileNameSIRVs('sirv')" hidden>
+      <div id="sirv-file-name" class="file-name">No file chosen...</div>
+    </div>
+
+
+    <!-- ERCC -->
+    <div class="ercc-checkbox-container">
+        <label>
+            <input type="checkbox" id="ercc-checkbox" value="ERCC" onclick="toggleFileInput('ercc')"> ERCC
+        </label>
+    </div>
+
+    <div id="ercc-file-container" style="display: none;">
+      <label for="ercc-file-upload" class="custom-file-upload_ercc">Choose ERCC</label>
+      <input type="file" id="ercc-file-upload" name="ercc_file" onchange="displayFileNameSIRVs('ercc')" hidden>
+      <div id="ercc-file-name" class="file-name">No file chosen...</div>
+    </div>
+
+    <!-- SEQUIN -->
+      <div class="sequin-checkbox-container">
+        <label>
+            <input type="checkbox" id="sequin-checkbox" value="SEQUIN" onclick="toggleFileInput('sequin')"> SEQUIN
+        </label>
+    </div>
+
+    <div id="sequin-file-container" style="display: none;">
+      <label for="sequin-file-upload" class="custom-file-upload_sequin">Choose SEQUIN</label>
+      <input type="file" id="sequin-file-upload" name="sequin_file" onchange="displayFileNameSIRVs('sequin')" hidden>
+      <div id="sequin-file-name" class="file-name">No file chosen...</div>
+    </div>
+  </div>
+</div>
+
+        <!-- New boxes will be appended here -->
+<div id="additional-datasets-container"></div>
+    </form>
+  </div>
+
+  <!-- Add dataset button -->
+<div class="add-dataset-container">
+  <button id="add-dataset-button" class="add-dataset">+ Add Dataset</button>
+  <button id="remove-dataset-button" class="remove-dataset" style="display: none; position: absolute">- Remove Dataset</button>
+</div>
+
+<!-- Terminal Log Container -->
+
+
+
+  <!-- Overlay (Hidden by Default) -->
+  <div id="overlay">
+      <div id="progress-container">
+          <h2 id="status-message">Booting Script...</h2>
+          <div id="progress-bar-container">
+              <div id="progress-bar"></div>
+          </div>
+          <div id="terminal-log-container">
+            <p>Terminal logs will appear here...</p>
+          </div>
+      </div>
+  </div>
+</main>
+
+
+<script>
+// Select the toggle switch and the dropdown menu
+const toggleSwitch = document.getElementById("toggleSwitchComparison");
+const comparison_dropdown = document.querySelector(".comparison");
+
+// Add an event listener to the toggle switch
+toggleSwitch.addEventListener("change", function () {
+    if (toggleSwitch.checked) {
+        // Show the dropdown when toggle is ON (Yes)
+        comparison_dropdown.style.display = "flex";
+    } else {
+        // Hide the dropdown when toggle is OFF (No)
+        comparison_dropdown.style.display = "none";
+    }
+});
+
+    // Initialize Choices.js with the option to remove selected items
+document.addEventListener('DOMContentLoaded', function () {
+    const comparisonDropdown = new Choices('#comparison-dropdown', {
+        removeItems: true,
+        removeItemButton: true,
+        searchEnabled: true,
+        placeholderValue: 'Select options',
+        shouldSort: false,
+        itemSelectText: ''
+    });
+
+    // Function to add 'X' buttons to selected items only
+    function addRemoveButtons() {
+        document.querySelectorAll('.choices__list--multiple .choices__item').forEach(item => {
+            if (!item.querySelector('.remove-btn')) {
+                let removeButton = document.createElement('span');
+                removeButton.classList.add('remove-btn');
+                removeButton.innerHTML = 'x';
+                removeButton.style.cursor = 'pointer';
+
+                removeButton.addEventListener('click', function () {
+                    const valueToRemove = item.getAttribute('data-value');
+                    comparisonDropdown.removeActiveItemsByValue(valueToRemove);
+                });
+
+                item.appendChild(removeButton);
+            }
+        });
+    }
+
+    // Watch for changes in the selection and add buttons
+    document.querySelector('#comparison-dropdown').addEventListener('change', function () {
+        setTimeout(addRemoveButtons, 10); // Delay to allow Choices.js to render items
+    });
+
+});
+
+
+// Toggle the visibility of the comparison dropdown based on the toggle switch
+const toggleSwitchComparison = document.getElementById("toggleSwitchComparison");
+const comparisonContainer = document.querySelector(".comparison");
+
+toggleSwitchComparison.addEventListener("change", function () {
+  if (this.checked) {
+    comparisonContainer.style.display = "block"; // Show the dropdown when toggle is ON
+  } else {
+    comparisonContainer.style.display = "none"; // Hide the dropdown when toggle is OFF
+  }
+});
+
+
+
+
+// Logic for Library Preparation
+const libraryDropdown = document.getElementById('library-dropdown');
+const libraryCustomInput = document.getElementById('library-custom-input');
+
+libraryDropdown.addEventListener('change', function () {
+    if (libraryDropdown.value === 'custom') {
+        //libraryDropdown.style.display = 'none';
+        libraryCustomInput.style.display = 'inline-block';
+        libraryCustomInput.required = true;
+    } else {
+        libraryDropdown.style.display = 'inline-block';
+        libraryCustomInput.style.display = 'none';
+        libraryCustomInput.required = false;
+    }
+});
+
+// Logic for Platform
+const platformDropdown = document.getElementById('platform-dropdown');
+const platformCustomInput = document.getElementById('platform-custom-input');
+
+platformDropdown.addEventListener('change', function () {
+    if (platformDropdown.value === 'custom') {
+        //platformDropdown.style.display = 'none';
+        platformCustomInput.style.display = 'inline-block';
+        platformCustomInput.required = true;
+    } else {
+        platformDropdown.style.display = 'inline-block';
+        platformCustomInput.style.display = 'none';
+        platformCustomInput.required = false;
+    }
+});
+
+
+// Get the annotation dropdown and upload row
+const annotationDropdown = document.getElementById('annotation-dropdown');
+const annotationUploadRow = document.getElementById('annotation-upload-row');
+const referenceDropdown = document.getElementById('reference-dropdown');
+const referenceUploadRow = document.getElementById('reference-upload-row');
+const dropdown = document.getElementById('organism-dropdown');
+const customInput = document.getElementById('organism-custom-input');
+const coverageDropdown1 = document.getElementById('coverage-dropdown');
+
+
+let setAnnotationBox2ToCustom = false;
+
+// Add event listener to the Organism dropdown
+dropdown.addEventListener('change', function () {
+    dropdown.style.color = 'black';
+
+    if (dropdown.value === 'custom') {
+        // Show the custom organism input
+        customInput.style.display = 'inline-block';
+        customInput.required = true;
+
+    } else {
+        // Hide the custom organism input
+        customInput.style.display = 'none';
+        customInput.required = false;
+    }
+});
+
+// Listen for changes in the organism dropdown
+dropdown.addEventListener('change', function() {
+    dropdown.style.color = 'black';
+
+    if (dropdown.value === 'custom') {
+        customInput.style.display = 'inline-block';
+        customInput.required = true;
+
+    } else {
+        customInput.style.display = 'none';
+        customInput.required = false;
+    }
+});
+
+// Reference logic
+function toggleReferenceInput() {
+  if (referenceDropdown.value === 'custom') {
+    referenceUploadRow.style.display = 'flex';
+  } else {
+    referenceUploadRow.style.display = 'none';
+  }
+}
+
+function displayReferenceFileName() {
+  const fileInput = document.getElementById('reference-upload');
+  const fileNameDisplay = document.getElementById('reference-file-name-display');
+  if (fileInput.files.length > 0) {
+    fileNameDisplay.textContent = fileInput.files[0].name;
+    fileNameDisplay.style.color = 'black';
+  } else {
+    fileNameDisplay.textContent = "No file chosen";
+    fileNameDisplay.style.color = '#6c6c6c';
+  }
+}
+
+// Display the selected file name
+function displayFileName() {
+  const fileInput = document.getElementById('file-upload');
+  const fileNameDisplay = document.getElementById('file-name-display');
+
+  if (fileInput.files.length > 0) {
+    fileNameDisplay.textContent = fileInput.files[0].name;
+    fileNameDisplay.style.color = 'black'; // Change text color to black
+  } else {
+    fileNameDisplay.textContent = "No file chosen";
+    fileNameDisplay.style.color = '#6c6c6c'; // Reset text color to default gray
+  }
+}
+
+// Display the selected annotation file name
+function displayAnnotationFileName() {
+  const fileInput = document.getElementById('annotation-upload');
+  const fileNameDisplay = document.getElementById('annotation-file-name-display');
+
+  if (fileInput.files.length > 0) {
+    fileNameDisplay.textContent = fileInput.files[0].name;
+    fileNameDisplay.style.color = 'black';
+  } else {
+    fileNameDisplay.textContent = "No file chosen";
+    fileNameDisplay.style.color = '#6c6c6c';
+  }
+}
+
+// Toggle the annotation file input based on selection
+function toggleAnnotationInput() {
+  const annotationDropdown = document.getElementById('annotation-dropdown');
+  const annotationUploadRow = document.getElementById('annotation-upload-row');
+
+  if (annotationDropdown.value === 'custom') {
+    annotationUploadRow.style.display = 'flex';
+  } else {
+    annotationUploadRow.style.display = 'none';
+  }
+}
+
+// Toggle the coverage directory input based on selection
+function toggleCoverageInput() {
+    const coverageDropdown = document.getElementById('coverage-dropdown');
+    const coverageUploadRow = document.getElementById('coverage-upload-row');
+
+    if (coverageDropdown.value === 'custom') {
+        coverageUploadRow.style.display = 'flex';
+    } else {
+        coverageUploadRow.style.display = 'none';
+        resetCoverageDirectoryName(); // Reset the directory display
+    }
+}
+
+// Display the selected directory name(s)
+function displayCoverageDirectoryName() {
+    const directoryInput = document.getElementById('coverage-upload');
+    const directoryNameDisplay = document.getElementById('coverage-directory-name-display');
+
+    if (directoryInput.files.length > 0) {
+        const directoryNames = Array.from(directoryInput.files)
+            .map(file => file.webkitRelativePath.split('/')[0])
+            .filter((value, index, self) => self.indexOf(value) === index); // Get unique directory names
+
+        directoryNameDisplay.textContent = directoryNames.join(', ');
+        directoryNameDisplay.style.color = 'black';
+    } else {
+        resetCoverageDirectoryName();
+    }
+}
+
+// Reset the coverage directory display
+function resetCoverageDirectoryName() {
+    const directoryNameDisplay = document.getElementById('coverage-directory-name-display');
+    directoryNameDisplay.textContent = "No directory chosen...";
+    directoryNameDisplay.style.color = '#6c6c6c';
+}
+
+// JavaScript to animate the progress bar and show the overlay
+function start_progress(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    document.getElementById('overlay').style.display = 'flex';
+
+    // Collect form data
+    var formData = new FormData(document.getElementById('script-form'));
+
+    // Add the selected organism to the form data
+    // Determine which organism value to use
+    const selectedOrganism = dropdown.value;
+    if (selectedOrganism === 'custom') {
+      // Use custom input value
+      formData.set('organism', customInput.value);
+    } else {
+      // Use the selected organism from dropdown
+      formData.set('organism', selectedOrganism);
+    }
+
+    const selectedPlatform = platformDropdown.value;
+    if (selectedPlatform === 'custom') {
+      formData.set('platform', platformCustomInput.value);
+    } else {
+      formData.append('platform', selectedPlatform);
+    }
+
+    const selectedLibrary = libraryDropdown.value;
+    if (selectedLibrary === 'custom') {
+      formData.set('library_preparation', libraryCustomInput.value);
+    } else {
+      formData.append('library_preparation', selectedLibrary);
+    }
+
+    const toolInputElement = document.getElementById('tool-input');
+    const toolName = toolInputElement.value.trim() === '' ? 'your_tool' : toolInputElement.value.trim();
+    formData.append('tool', toolName);
+
+    const selectedDataCategory = document.getElementById('data-category-dropdown').value;
+    formData.append('data_category', selectedDataCategory);
+
+    // Check if second dataset elements exist (if user clicked + Add Dataset)
+    const fileUpload2 = document.getElementById('file-upload-2');
+    if (fileUpload2) {
+      // If a second file was chosen, append it
+      if (fileUpload2.files.length > 0) {
+        formData.append('file_2', fileUpload2.files[0]);
+      }
+
+      // Handle second platform custom field
+      const platformDropdown2 = document.getElementById('platform-dropdown-2');
+      const platformCustomInput2 = document.getElementById('platform-custom-input-2');
+      if (platformDropdown2.value === 'custom') {
+        formData.set('platform_2', platformCustomInput2.value);
+      } else {
+        formData.set('platform_2', platformDropdown2.value);
+      }
+
+      // Handle second library custom field
+      const libraryDropdown2 = document.getElementById('library-dropdown-2');
+      const libraryCustomInput2 = document.getElementById('library-custom-input-2');
+      if (libraryDropdown2.value === 'custom') {
+        formData.set('library_preparation_2', libraryCustomInput2.value);
+      } else {
+        formData.set('library_preparation_2', libraryDropdown2.value);
+      }
+
+      const dataCategoryDropdown2 = document.getElementById('data-category-dropdown-2');
+      if (dataCategoryDropdown2) {
+        const selectedDataCategory2 = dataCategoryDropdown2.value;
+        formData.append('data_category_2', selectedDataCategory2);
+      }
+
+      // If a second annotation file was chosen, append it
+      const annotationInput2 = document.getElementById('annotation-upload-2');
+      if (annotationInput2 && annotationInput2.files.length > 0) {
+        formData.append('annotation_file_2', annotationInput2.files[0]);
+      }
+      // And also store the dropdown selection
+      const annotationDropdown2 = document.getElementById('annotation-dropdown-2');
+      if (annotationDropdown2) {
+        formData.append('annotation_2', annotationDropdown2.value);
+      }
+
+      // If a second reference file was chosen, append it
+      const referenceInput2 = document.getElementById('reference-upload-2');
+      if (referenceInput2 && referenceInput2.files.length > 0) {
+        formData.append('reference_file_2', referenceInput2.files[0]);
+      }
+      const referenceDropdown2 = document.getElementById('reference-dropdown-2');
+      if (referenceDropdown2) {
+        formData.append('reference_2', referenceDropdown2.value);
+      }
+    }
+
+    // Start the server-side process (Ajax + SSE)
+    $.ajax({
+        url: "/run_script",
+        type: "POST",
+        data: formData,
+        processData: false,  // Prevent jQuery from converting the data
+        contentType: false,  // Prevent jQuery from overriding the content type
+        success: function(response) {
+            console.log(response);
+
+            // Start receiving progress updates via SSE
+            const source = new EventSource("/progress_stream");
+            source.onmessage = function (event) {
+                const data = JSON.parse(event.data);
+                const progress = data.progress;
+                const message = data.message;
+
+                // Update the progress bar
+                document.getElementById("progress-bar").style.width = progress + "%";
+
+                // Update the status message
+                document.getElementById("status-message").textContent = message;
+
+                if (progress >= 100) {
+                    // Close the SSE connection
+                    source.close();
+                    // Redirect to the results page
+                    window.location.href = "/challenge3_results";
+                }
+            };
+
+            source.onerror = function (event) {
+                source.close();
+            };
+        }
+    });
+}
+
+let datasetCount = 0; // Keep track of how many additional datasets have been added
+let secondDatasetContainer = null; // We'll store a reference to the appended container
+let dataset2Box = null; // <-- We'll store the dashed box div here
+
+// Activated process after '+ add dataset'
+document.getElementById('add-dataset-button').addEventListener('click', function () {
+  datasetCount++;
+
+  // Only allow one additional dataset in this example
+  if (datasetCount > 1) return;
+
+  // 1) CREATE the dashed box
+    dataset2Box = document.createElement('div');
+    dataset2Box.className = 'box-dataset2';
+  const container = document.getElementById('additional-datasets-container');
+  container.appendChild(dataset2Box);
+
+  // Create a container for the new dataset inputs
+  secondDatasetContainer = document.createElement('div');
+  secondDatasetContainer.className = 'dataset-container';
+  secondDatasetContainer.style = "padding: 10px;";
+
+  // ----------- (BEGIN) EXACT SAME CODE YOU ORIGINALLY HAD FOR CREATING DATASET #2 -----------
+  const uploadRow = document.createElement('div');
+  uploadRow.className = 'upload-row-2';
+  const fileLabel = document.createElement('span');
+  fileLabel.className = 'file-label';
+  fileLabel.textContent = "Transcriptome File 2:";
+  const fileNameDisplay = document.createElement('div');
+  fileNameDisplay.id = `file-name-display-2`;
+  fileNameDisplay.textContent = "No file chosen...";
+  const customFileUpload = document.createElement('label');
+  customFileUpload.className = 'custom-file-upload-transcriptome-2';
+  customFileUpload.textContent = 'Choose File';
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.id = `file-upload-2`;
+  fileInput.name = `file_2`;
+  fileInput.hidden = true;
+  fileInput.addEventListener('change', function () {
+      const fileNameDisplay2 = document.getElementById(`file-name-display-2`);
+      if (fileInput.files.length > 0) {
+          fileNameDisplay2.textContent = fileInput.files[0].name;
+          fileNameDisplay2.style.color = 'black';
+      } else {
+          fileNameDisplay2.textContent = "No file chosen";
+          fileNameDisplay2.style.color = '#6c6c6c';
+      }
+  });
+  customFileUpload.appendChild(fileInput);
+  uploadRow.appendChild(fileLabel);
+  uploadRow.appendChild(fileNameDisplay);
+  uploadRow.appendChild(customFileUpload);
+  secondDatasetContainer.appendChild(uploadRow);
+
+  // Platform 2
+const platformRow = document.createElement('div');
+platformRow.className = 'platform-row'; // Add class for styling
+const platformLabel = document.createElement('label');
+platformLabel.textContent = "Platform 2: ";
+const platformDropdown2 = document.createElement('select');
+platformDropdown2.id = 'platform-dropdown-2';
+platformDropdown2.name = `platform_2`;
+platformDropdown2.className = 'platform-dropdown-2'; // Add class for styling
+
+const pacbioOption = document.createElement('option');
+pacbioOption.value = 'PacBio';
+pacbioOption.textContent = 'PacBio';
+const ontOption = document.createElement('option');
+ontOption.value = 'ONT';
+ontOption.textContent = 'Oxford Nanopore Technologies';
+const customPlatformOption2 = document.createElement('option');
+customPlatformOption2.value = 'custom';
+customPlatformOption2.textContent = 'Custom';
+
+platformDropdown2.appendChild(pacbioOption);
+platformDropdown2.appendChild(ontOption);
+platformDropdown2.appendChild(customPlatformOption2);
+platformRow.appendChild(platformLabel);
+platformRow.appendChild(platformDropdown2);
+secondDatasetContainer.appendChild(platformRow);
+
+// Hidden input for custom platform 2
+const platformCustomInput2 = document.createElement('input');
+platformCustomInput2.type = 'text';
+platformCustomInput2.id = 'platform-custom-input-2';
+platformCustomInput2.name = 'platform_custom_2';
+platformCustomInput2.placeholder = 'Enter custom platform...';
+platformCustomInput2.className = 'platform-custom-input-2'; // Add class for styling
+secondDatasetContainer.appendChild(platformCustomInput2);
+
+  // Library Preparation 2
+  const libraryRow = document.createElement('div');
+  libraryRow.className = 'library-row-2';
+  const libraryLabel = document.createElement('label');
+  libraryLabel.textContent = "Library Preparation 2: ";
+  const libraryDropdown2 = document.createElement('select');
+  libraryDropdown2.id = 'library-dropdown-2';
+  libraryDropdown2.name = `library_preparation_2`;
+
+  const cdnaOption = document.createElement('option');
+  cdnaOption.value = 'cDNA';
+  cdnaOption.textContent = 'cDNA';
+  const directRnaOption = document.createElement('option');
+  directRnaOption.value = 'directRNA';
+  directRnaOption.textContent = 'directRNA';
+  const r2c2Option = document.createElement('option');
+  r2c2Option.value = 'R2C2';
+  r2c2Option.textContent = 'R2C2';
+  const capTrapOption = document.createElement('option');
+  capTrapOption.value = 'CapTrap';
+  capTrapOption.textContent = 'CapTrap';
+  const customLibraryOption2 = document.createElement('option');
+  customLibraryOption2.value = 'custom';
+  customLibraryOption2.textContent = 'Custom';
+
+  libraryDropdown2.appendChild(cdnaOption);
+  libraryDropdown2.appendChild(directRnaOption);
+  libraryDropdown2.appendChild(r2c2Option);
+  libraryDropdown2.appendChild(capTrapOption);
+  libraryDropdown2.appendChild(customLibraryOption2);
+
+  libraryRow.appendChild(libraryLabel);
+  libraryRow.appendChild(libraryDropdown2);
+  secondDatasetContainer.appendChild(libraryRow);
+
+  // Hidden input for custom library 2
+  const libraryCustomInput2 = document.createElement('input');
+  libraryCustomInput2.type = 'text';
+  libraryCustomInput2.id = 'library-custom-input-2';
+  libraryCustomInput2.name = 'library_custom_2';
+  libraryCustomInput2.placeholder = 'Enter custom library preparation...';
+  secondDatasetContainer.appendChild(libraryCustomInput2);
+
+  // Data Category 2
+  const dataCategoryRow = document.createElement('div');
+  dataCategoryRow.className = 'data-category-row';
+  const dataCategoryLabel = document.createElement('label');
+  dataCategoryLabel.textContent = "Data Category 2: ";
+  const dataCategoryDropdown2 = document.createElement('select');
+  dataCategoryDropdown2.id = 'data-category-dropdown-2';
+  dataCategoryDropdown2.name = `data_category_2`;
+  const naOption = document.createElement('option');
+  naOption.value = 'NA';
+  naOption.textContent = 'NA';
+  const lsOption = document.createElement('option');
+  lsOption.value = 'LS';
+  lsOption.textContent = 'LS';
+  const soOption = document.createElement('option');
+  soOption.value = 'SO';
+  soOption.textContent = 'SO';
+  const loOption = document.createElement('option');
+  loOption.value = 'LO';
+  loOption.textContent = 'LO';
+  dataCategoryDropdown2.appendChild(naOption);
+  dataCategoryDropdown2.appendChild(lsOption);
+  dataCategoryDropdown2.appendChild(soOption);
+  dataCategoryDropdown2.appendChild(loOption);
+  dataCategoryRow.appendChild(dataCategoryLabel);
+  dataCategoryRow.appendChild(dataCategoryDropdown2);
+  secondDatasetContainer.appendChild(dataCategoryRow);
+
+  // Annotation File 2
+  const annotationContainer2 = document.createElement('div');
+  annotationContainer2.className = 'dropdown-container annotation-container-2';
+
+  const annotationLabel2 = document.createElement('label');
+  annotationLabel2.setAttribute('for', `annotation-dropdown-2`);
+  annotationLabel2.textContent = `Annotation File 2: `;
+
+  const annotationDropdown2 = document.createElement('select');
+  annotationDropdown2.className = 'dropdown';
+  annotationDropdown2.id = `annotation-dropdown-2`;
+  annotationDropdown2.name = `annotation_2`;
+
+  const defaultOption2 = document.createElement('option');
+  defaultOption2.value = 'default';
+  defaultOption2.selected = true;
+  defaultOption2.textContent = 'Default';
+
+  const customOption2 = document.createElement('option');
+  customOption2.value = 'custom';
+  customOption2.textContent = 'Custom';
+
+  annotationDropdown2.appendChild(defaultOption2);
+  annotationDropdown2.appendChild(customOption2);
+
+  annotationContainer2.appendChild(annotationLabel2);
+  annotationContainer2.appendChild(annotationDropdown2);
+
+  const annotationUploadRow2 = document.createElement('div');
+  annotationUploadRow2.className = 'upload-row';
+  annotationUploadRow2.id = `annotation-upload-row-2`;
+
+  const annotationFileDisplay2 = document.createElement('div');
+  annotationFileDisplay2.id = `annotation-file-name-display-2`;
+  annotationFileDisplay2.textContent = "No file chosen...";
+
+  const customAnnotationUpload2 = document.createElement('label');
+  customAnnotationUpload2.className = 'custom-file-upload-annotation-2';
+  customAnnotationUpload2.textContent = 'Choose File';
+
+  const annotationInput2 = document.createElement('input');
+  annotationInput2.type = 'file';
+  annotationInput2.id = `annotation-upload-2`;
+  annotationInput2.name = `annotation_file_2`;
+  annotationInput2.hidden = true;
+
+  annotationInput2.addEventListener('change', function() {
+      if (annotationInput2.files.length > 0) {
+          annotationFileDisplay2.textContent = annotationInput2.files[0].name;
+          annotationFileDisplay2.style.color = 'black';
+      } else {
+          annotationFileDisplay2.textContent = "No file chosen";
+          annotationFileDisplay2.style.color = '#6c6c6c';
+      }
+  });
+
+  customAnnotationUpload2.appendChild(annotationInput2);
+  annotationUploadRow2.appendChild(annotationFileDisplay2);
+  annotationUploadRow2.appendChild(customAnnotationUpload2);
+
+  secondDatasetContainer.appendChild(annotationContainer2);
+  secondDatasetContainer.appendChild(annotationUploadRow2);
+
+  annotationDropdown2.addEventListener('change', function() {
+    if (annotationDropdown2.value === 'custom') {
+        annotationUploadRow2.style.display = 'flex';
+    } else {
+        annotationUploadRow2.style.display = 'none';
+    }
+  });
+
+  // Event listeners for custom options in second dataset
+  platformDropdown2.addEventListener('change', function() {
+    if (platformDropdown2.value === 'custom') {
+      platformCustomInput2.style.display = 'inline-block';
+      platformCustomInput2.required = true;
+    } else {
+      platformCustomInput2.style.display = 'none';
+      platformCustomInput2.required = false;
+    }
+  });
+
+  libraryDropdown2.addEventListener('change', function() {
+    if (libraryDropdown2.value === 'custom') {
+      libraryCustomInput2.style.display = 'inline-block';
+      libraryCustomInput2.required = true;
+    } else {
+      libraryCustomInput2.style.display = 'none';
+      libraryCustomInput2.required = false;
+    }
+  });
+
+  // Reference File 2
+  const referenceContainer2 = document.createElement('div');
+  referenceContainer2.className = 'dropdown-container reference-container-2';
+
+  const referenceLabel2 = document.createElement('label');
+  referenceLabel2.setAttribute('for', `reference-dropdown-2`);
+  referenceLabel2.textContent = `Reference File 2: `;
+
+  const referenceDropdown2 = document.createElement('select');
+  referenceDropdown2.className = 'dropdown';
+  referenceDropdown2.id = `reference-dropdown-2`;
+  referenceDropdown2.name = `reference_2`;
+
+  const defaultOptionRef2 = document.createElement('option');
+  defaultOptionRef2.value = 'default';
+  defaultOptionRef2.selected = true;
+  defaultOptionRef2.textContent = 'Default';
+
+  const customOptionRef2 = document.createElement('option');
+  customOptionRef2.value = 'custom';
+  customOptionRef2.textContent = 'Custom';
+
+  referenceDropdown2.appendChild(defaultOptionRef2);
+  referenceDropdown2.appendChild(customOptionRef2);
+  referenceContainer2.appendChild(referenceLabel2);
+  referenceContainer2.appendChild(referenceDropdown2);
+
+  const referenceUploadRow2 = document.createElement('div');
+  referenceUploadRow2.className = 'upload-row';
+  referenceUploadRow2.id = `reference-upload-row-2`;
+
+  const referenceFileDisplay2 = document.createElement('div');
+  referenceFileDisplay2.id = `reference-file-name-display-2`;
+  referenceFileDisplay2.textContent = "No file chosen...";
+
+  const customReferenceUpload2 = document.createElement('label');
+  customReferenceUpload2.className = 'custom-file-upload-2';
+  customReferenceUpload2.textContent = 'Choose File';
+
+  const referenceInput2 = document.createElement('input');
+  referenceInput2.type = 'file';
+  referenceInput2.id = `reference-upload-2`;
+  referenceInput2.name = `reference_file_2`;
+  referenceInput2.hidden = true;
+
+  // Show file name when user selects a file
+  referenceInput2.addEventListener('change', function () {
+      if (referenceInput2.files.length > 0) {
+          referenceFileDisplay2.textContent = referenceInput2.files[0].name;
+          referenceFileDisplay2.style.color = 'black';
+      } else {
+          referenceFileDisplay2.textContent = "No file chosen";
+          referenceFileDisplay2.style.color = '#6c6c6c';
+      }
+  });
+
+  customReferenceUpload2.appendChild(referenceInput2);
+  referenceUploadRow2.appendChild(referenceFileDisplay2);
+  referenceUploadRow2.appendChild(customReferenceUpload2);
+
+  secondDatasetContainer.appendChild(referenceContainer2);
+  secondDatasetContainer.appendChild(referenceUploadRow2);
+
+
+  referenceDropdown2.addEventListener('change', function () {
+      if (referenceDropdown2.value === 'custom') {
+          referenceUploadRow2.style.display = 'flex';
+      } else {
+          referenceUploadRow2.style.display = 'none';
+      }
+  });
+
+  // Coverage file 2
+  const coverageContainer2 = document.createElement('div');
+  coverageContainer2.className = 'dropdown-container coverage-container-2';
+
+  const coverageLabel2 = document.createElement('label');
+  coverageLabel2.setAttribute('for', `coverage-dropdown-2`);
+  coverageLabel2.textContent = `Coverage Directory 2: `;
+
+  const coverageDropdown2 = document.createElement('select');
+  coverageDropdown2.className = 'dropdown';
+  coverageDropdown2.id = `coverage-dropdown-2`;
+  coverageDropdown2.name = `coverage_directory_2`;
+
+  const noneOption = document.createElement('option');
+  noneOption.value = 'none';
+  noneOption.selected = true;
+  noneOption.textContent = 'None';
+
+  const defaultOptionCoverage2 = document.createElement('option');
+  defaultOptionCoverage2.value = 'default';
+  defaultOptionCoverage2.textContent = 'Default';
+
+  const customOptionCoverage2 = document.createElement('option');
+  customOptionCoverage2.value = 'custom';
+  customOptionCoverage2.textContent = 'Custom';
+
+  coverageDropdown2.appendChild(noneOption);
+  coverageDropdown2.appendChild(defaultOptionCoverage2)
+  coverageDropdown2.appendChild(customOptionCoverage2);
+
+  const coverageUploadRow2 = document.createElement('div');
+  coverageUploadRow2.className = 'upload-row';
+  coverageUploadRow2.id = `coverage-upload-row-2`;
+
+  const coverageFileDisplay2 = document.createElement('div');
+  coverageFileDisplay2.id = `coverage-directory-name-display-2`;
+  coverageFileDisplay2.textContent = "No directory chosen...";
+
+  const customCoverageUpload2 = document.createElement('label');
+  customCoverageUpload2.className = 'custom-file-upload-coverage-2';
+  customCoverageUpload2.textContent = 'Choose Directory';
+
+  const coverageInput2 = document.createElement('input');
+  coverageInput2.type = 'file';
+  coverageInput2.id = `coverage-upload-2`;
+  coverageInput2.name = `coverage_directory_2[]`;
+  coverageInput2.webkitdirectory = true;
+  coverageInput2.multiple = true;
+  coverageInput2.hidden = true;
+
+  coverageInput2.addEventListener('change', function () {
+      if (coverageInput2.files.length > 0) {
+          const directoryNames = Array.from(coverageInput2.files)
+              .map(file => file.webkitRelativePath.split('/')[0])
+              .filter((value, index, self) => self.indexOf(value) === index);
+
+          coverageFileDisplay2.textContent = directoryNames.join(', ');
+          coverageFileDisplay2.style.color = 'black';
+      } else {
+          coverageFileDisplay2.textContent = "No directory chosen...";
+          coverageFileDisplay2.style.color = '#6c6c6c';
+      }
+  });
+
+  customCoverageUpload2.appendChild(coverageInput2);
+  coverageUploadRow2.appendChild(coverageFileDisplay2);
+  coverageUploadRow2.appendChild(customCoverageUpload2);
+
+  coverageContainer2.appendChild(coverageLabel2);
+  coverageContainer2.appendChild(coverageDropdown2);
+  secondDatasetContainer.appendChild(coverageContainer2);
+  secondDatasetContainer.appendChild(coverageUploadRow2);
+
+
+
+  coverageDropdown2.addEventListener('change', function () {
+      if (coverageDropdown2.value === 'custom') {
+          coverageUploadRow2.style.display = 'flex';
+      } else {
+          coverageUploadRow2.style.display = 'none';
+          coverageFileDisplay2.textContent = "No directory chosen...";
+          coverageFileDisplay2.style.color = '#6c6c6c';
+      }
+  });
+
+  // ----------- (END) EXACT SAME CODE YOU ORIGINALLY HAD FOR CREATING DATASET #2 -----------
+
+  // Append the dataset container to the additional datasets container
+  container.appendChild(secondDatasetContainer);
+
+  // Show the 'Remove Dataset' button, hide the '+ Add Dataset' button
+  document.getElementById('remove-dataset-button').style.display = 'inline-block';
+  document.getElementById('add-dataset-button').style.display = 'none';
+});
+
+// Remove Dataset logic
+document.getElementById('remove-dataset-button').addEventListener('click', function () {
+  // If we have actually added a second dataset, remove it
+  if (secondDatasetContainer) {
+    secondDatasetContainer.remove();
+    secondDatasetContainer = null;
+  }
+
+  // Remove the dashed box if it exists
+    if (dataset2Box) {
+      dataset2Box.remove();
+      dataset2Box = null;
+    }
+  datasetCount = 0;
+
+  // Hide the 'Remove Dataset' button, re-show the '+ Add Dataset' button
+  document.getElementById('remove-dataset-button').style.display = 'none';
+  document.getElementById('add-dataset-button').style.display = 'inline-block';
+});
+
+// Comparison dropdown logic
+document.getElementById('comparison-dropdown').addEventListener('change', function () {
+  const tickableBoxes = document.getElementById('tickable-boxes');
+  if (this.value === 'Custom') {
+      tickableBoxes.style.display = 'block'; // Show the tickable boxes
+  } else {
+      tickableBoxes.style.display = 'none'; // Hide the tickable boxes
+  }
+});
+
+// #################### SIRVs #####################
+// Toggle the file input and file name display for each SIRV type
+function toggleFileInput(type) {
+  const container = document.getElementById(`${type}-file-container`);
+  const checkbox = document.getElementById(`${type}-checkbox`);
+
+  if (checkbox.checked) {
+    container.style.display = 'block'; // Show the file input when checkbox is checked
+  } else {
+    container.style.display = 'none'; // Hide the file input when checkbox is unchecked
+    // Reset the file input and file name display
+    document.getElementById(`${type}-file-upload`).value = '';
+    document.getElementById(`${type}-file-name`).textContent = 'No file chosen...';
+  }
+}
+
+// Display the file name after file selection
+function displayFileNameSIRVs(type) {
+  const fileInput = document.getElementById(`${type}-file-upload`);
+  const fileNameDisplay = document.getElementById(`${type}-file-name`);
+
+  if (fileInput.files.length > 0) {
+    fileNameDisplay.textContent = fileInput.files[0].name; // Show the selected file name
+    fileNameDisplay.style.color = 'black'; // Optional: Highlight the file name
+  } else {
+    fileNameDisplay.textContent = 'No file chosen...'; // Reset if no file is selected
+    fileNameDisplay.style.color = '#6c6c6c'; // Optional: Reset the color
+  }
+}
+
+// Grab references to the elements we care about
+const lrgaspToggle = document.getElementById("toggleSwitchLRGASP");
+const organismDropdown = document.getElementById("organism-dropdown");
+const annotationDropdownn = document.getElementById("annotation-dropdown");
+const referenceDropdownn = document.getElementById("reference-dropdown");
+const coverageDropdown = document.getElementById("coverage-dropdown");
+
+// -------------- UPDATE DROPDOWNS LOGIC -------------- //
+function updateDropdowns() {
+  const toggleIsOn = lrgaspToggle.checked;
+  const organism   = organismDropdown.value;
+
+  // If user chooses "custom" organism, we forcibly turn OFF the switch
+  // and set annotation, reference, coverage to "custom".
+  if (organism === "custom") {
+
+    lrgaspToggle.checked = false;
+    annotationDropdownn.value = "custom";
+    referenceDropdownn.value  = "custom";
+    coverageDropdown.value   = "custom";
+  }
+  else {
+    // If the user is NOT choosing custom organism, we check the toggle
+    // and the organism to decide how to set annotation, reference, coverage:
+    if (toggleIsOn) {
+      // ======== Toggle ON ========
+      if (organism === "mouse") {
+        annotationDropdownn.value = "default"; // e.g. "LRGASP Data"
+        referenceDropdownn.value  = "default"; // e.g. "LRGASP Data"
+        coverageDropdown.value   = "default"; // e.g. "LRGASP Data"
+      }
+      else if (organism === "manatee") {
+        annotationDropdownn.value = "NA";      // e.g. "none"
+        referenceDropdownn.value  = "default"; // e.g. "LRGASP Data"
+        coverageDropdown.value   = "default"; // e.g. "LRGASP Data"
+      }
+    }
+    else {
+      // ======== Toggle OFF ========
+      if (organism === "mouse") {
+        annotationDropdownn.value = "custom";
+        referenceDropdownn.value  = "custom";
+        coverageDropdown.value   = "custom";
+      }
+      else if (organism === "manatee") {
+        annotationDropdownn.value = "NA";      // e.g. "none"
+        referenceDropdownn.value  = "custom";
+        coverageDropdown.value   = "custom";
+      }
+    }
+  }
+
+  // Finally, we must re-check whether we need to show/hide the upload rows
+  // based on the new settings:
+  toggleAnnotationInput();
+  toggleReferenceInput();
+  toggleCoverageInput();
+}
+
+// -------------- EVENT LISTENERS -------------- //
+
+// Whenever user changes the LRGASP toggle:
+lrgaspToggle.addEventListener("change", function() {
+  updateDropdowns();
+});
+
+// Whenever user changes the organism dropdown:
+organismDropdown.addEventListener("change", function() {
+  updateDropdowns();
+});
+
+// Create an EventSource for terminal logs
+const terminalLogContainer = document.getElementById("terminal-log-container");
+const terminalSource = new EventSource("/terminal_stream");
+
+terminalSource.onmessage = function(event) {
+    // Append each new log line to the container
+    terminalLogContainer.innerHTML += event.data + "<br>";
+    // Auto-scroll to the bottom
+    terminalLogContainer.scrollTop = terminalLogContainer.scrollHeight;
+};
+
+terminalSource.onerror = function(event) {
+    // Optional: close connection on error
+    terminalSource.close();
+};
+
+</script>
+
+{% endblock %}
+</body>
+</html>
