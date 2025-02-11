@@ -2200,7 +2200,7 @@ def run(args):
         elif len(sys.argv) != one_file_args_length:
             print('2 files!!!!!!!!!!!!')
             busco_tsv2 = glob.glob(os.path.join(os.getcwd(), 'BUSCO_results.tsv'))[0]
-            cmd = RSCRIPTPATH + " {d}/{f} {c} {j} {d} {o} {b} {s} {t}your_tool {pl} {l} {da} {comp} {bambu} {RNABloom} {rnaSPAdes} {StringTie2IsoQuant} {sirv_list} {ercc_list} {sequin_list} {c2} {j2} {b2} {pl2} {l2} {da2}".format(d=utilitiesPath,
+            cmd = RSCRIPTPATH + " {d}/{f} {c} {j} {d} {o} {b} {s} {t}your_tool {pl} {l} {da} {comp} {bambu} {RNABloom} {rnaSPAdes} {StringTie2IsoQuant} {sirv_list} {ercc_list} {sequin_list} {c2} {j2} {b2} {pl2} {l2} {da2} {sirv_list2} {ercc_list2} {sequin_list2}".format(d=utilitiesPath,
                                                                                                      f=RSCRIPT_REPORT,
                                                                                                      c=outputClassPath1,
                                                                                                      j=outputJuncPath1,
@@ -2224,7 +2224,10 @@ def run(args):
                                                                                                      b2=busco_tsv2,
                                                                                                      pl2=args.platform2,
                                                                                                      l2=args.lib_prep2,
-                                                                                                     da2=args.data_cat2)
+                                                                                                     da2=args.data_cat2,
+                                                                                                     sirv_list2 = args.sirv_list2,
+                                                                                                     ercc_list2 = args.ercc_list2,
+                                                                                                     sequin_list2 = args.sequin_list2)
         if subprocess.check_call(cmd, shell=True) != 0:
             print("ERROR running command: {0}".format(cmd), file=sys.stderr)
             sys.exit(-1)
@@ -2603,6 +2606,9 @@ def main():
         parser.add_argument('sirv_list', help="\t ?")
         parser.add_argument('ercc_list', help="\t ?")
         parser.add_argument('sequin_list', help="\t ?")
+        parser.add_argument('sirv_list2', help="\t ?")
+        parser.add_argument('ercc_list2', help="\t ?")
+        parser.add_argument('sequin_list2', help="\t ?")
         parser.add_argument("--min_ref_len", type=int, default=0,
                             help="\t\tMinimum reference transcript length (default: 0 bp)")
         parser.add_argument("--force_id_ignore", action="store_true", default=True,
@@ -2661,6 +2667,8 @@ def main():
                             help='\t\tEntry JSON file that is requiered for uploading the submission. More info here: https://lrgasp.github.io/lrgasp-submissions/docs/metadata.html ',
                             required=False)
     args = parser.parse_args()
+    print(args.sirv_list)
+    print(args.ercc_list)
 
     args.skipORF = True
     args.output = 'lrgasp_platform_challenge_3'
@@ -2688,16 +2696,6 @@ def main():
         path_to_gtf = args.anno_1
         if args.cov_1 == 'custom':
             args.coverage = os.path.join("../../uploads/coverage_files", args.cov_dir_1)
-
-    if args.experiment_json is None:
-        args.experiment_json = os.path.join(utilitiesPath, "experiment_dummy.json")
-        print(
-            "WARNING: Experiment JSON wasn't provided. A fake one will be used (you can find it in utilities/experiment_dummy.json ). This might have an effect on the evaluation since spike-ins are different for mouse (Lexogen SIRVs Set4) and manatee (Lexogen SIRVs Set1) samples. Please, check at least the **species** field of the JSON file.")
-
-    if args.entry_json is None:
-        args.entry_json = os.path.join(utilitiesPath, "entry_dummy.json")
-        print(
-            "WARNING: Entry JSON wasn't provided. A fake one will be used (you can find it in utilities/entry_dummy.json ). This won't have an effect on the evaluation, but you will find the made-up attributes in your report titles.")
 
     if args.is_fusion:
         if args.orf_input is None:
@@ -2838,6 +2836,7 @@ def main():
             f.write("PolyAPeak\t" + (os.path.basename(args.polyA_peak) if args.polyA_peak is not None else "NA") + "\n")
             f.write("IsFusion\t" + str(args.is_fusion) + "\n")
 
+    print('args.anno:', args.anno_1)
     # Running functionality
     print("**** Running SQANTI3...", file=sys.stdout)
     print(f'PROGRESS: {15}')
